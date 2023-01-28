@@ -4,13 +4,14 @@
 #include <linux/netfilter/x_tables.h>
 
 static unsigned int markevil_tg(struct sk_buff * skb, const struct xt_action_param * par) {
-	struct iphdr * iph = ip_hdr(skb);
+	struct iphdr * iph;
 	__be16 orig_frag;
 
-	if (skb_ensure_writable(skb, skb->len)) {
+	if (skb_ensure_writable(skb, sizeof(*iph))) {
 		return NF_DROP;
 	}
 
+	iph = ip_hdr(skb);
 	orig_frag = iph->frag_off;
 	iph->frag_off = orig_frag | htons(0x8000);
 	csum_replace2(&iph->check, orig_frag, iph->frag_off);
