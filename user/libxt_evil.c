@@ -76,6 +76,6 @@ static struct xtables_match evil_mt_reg = {
 	.save          = evil_mt_save,
 };
 
-static void _init(void) {
+static void __attribute__((constructor)) init(void) {
 	xtables_register_match(&evil_mt_reg);
 }

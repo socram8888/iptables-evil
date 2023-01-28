@@ -1,14 +1,27 @@
 
-CFLAGS = -O2 -Wall -pedantic -I../shared
+CFLAGS = -O2 -Wall -pedantic -I../shared -fPIC
 XTABLES_SO_DIR = $(shell pkg-config xtables --variable xtlibdir)
 
-all: libxt_evil.so libxt_MARKEVIL.so
+OBJS := libxt_evil.so libxt_MARKEVIL.so
 
-install:
-	sudo cp *.so $(XTABLES_SO_DIR)
+ifeq ($(XTABLES_SO_DIR),)
+	$(error Cannot find xtables path - are pkg-config and libxtables-dev installed?)
+endif
+
+all: $(OBJS)
+
+install: $(OBJS)
+	install -t $(XTABLES_SO_DIR) -m 644 $(OBJS)
 
 lib%.so: lib%.o
-	gcc -shared -fPIC -o $@ $^
+	$(CC) $(CFLAGS) -shared -o $@ $<
 
 lib%.o: lib%.c
-	gcc $(CFLAGS) -D_INIT=lib$*_init -fPIC -c -o $@ $<
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	$(RM) $(OBJS)
+
+uninstall:
+	$(RM) $(XTABLES_SO_DIR)/libxt_evil.so
+	$(RM) $(XTABLES_SO_DIR)/libxt_MARKEVIL.so

@@ -26,6 +26,6 @@ static struct xtables_target markevil_tg_reg = {
 	.final_check   = markevil_tg_check,
 };
 
-static void _init(void) {
+static void __attribute__((constructor)) init(void) {
 	xtables_register_target(&markevil_tg_reg);
 }
