@@ -12,7 +12,7 @@ modules:
 
 install: modules
 	mkdir -p $(EXTRADIR)
-	install -m 644 -t xt_EVIL.ko
+	install -m 644 -t $(EXTRADIR) xt_EVIL.ko
 	depmod
 
 uninstall:
