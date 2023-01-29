@@ -18,7 +18,7 @@ static void markevil_tg_check(unsigned int flags) {
 
 static struct xtables_target markevil_tg_reg = {
 	.version       = XTABLES_VERSION,
-	.name          = "MARKEVIL",
+	.name          = "EVIL",
 	.revision      = 0,
 	.family        = PF_INET,
 	.help          = markevil_tg_help,

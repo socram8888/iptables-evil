@@ -1,8 +1,8 @@
 
-CFLAGS = -O2 -Wall -pedantic -I../shared -fPIC
+CFLAGS = -O2 -Wall -pedantic -fPIC
 XTABLES_SO_DIR = $(shell pkg-config xtables --variable xtlibdir)
 
-OBJS := libxt_evil.so libxt_MARKEVIL.so
+OBJS := libxt_EVIL.so
 
 ifeq ($(XTABLES_SO_DIR),)
 	$(error Cannot find xtables path - are pkg-config and libxtables-dev installed?)
@@ -23,5 +23,4 @@ clean:
 	$(RM) $(OBJS)
 
 uninstall:
-	$(RM) $(XTABLES_SO_DIR)/libxt_evil.so
-	$(RM) $(XTABLES_SO_DIR)/libxt_MARKEVIL.so
+	$(RM) $(XTABLES_SO_DIR)/libxt_EVIL.so

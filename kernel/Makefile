@@ -3,8 +3,7 @@ EXTRADIR := /lib/modules/$(shell uname -r)/extra
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
 
-ccflags-y := -I$(src)/../shared
-obj-m := xt_evil.o xt_MARKEVIL.o
+obj-m := xt_EVIL.o
 
 all: modules
 
@@ -13,11 +12,11 @@ modules:
 
 install: modules
 	mkdir -p $(EXTRADIR)
-	install -m 644 -t $(EXTRADIR) xt_evil.ko xt_MARKEVIL.ko
+	install -m 644 -t xt_EVIL.ko
 	depmod
 
 uninstall:
-	$(RM) $(EXTRADIR)/xt_evil.ko $(EXTRADIR)/xt_MARKEVIL.ko
+	$(RM) $(EXTRADIR)/xt_EVIL.ko
 	depmod
 
 clean:

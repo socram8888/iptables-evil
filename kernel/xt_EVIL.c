@@ -21,7 +21,7 @@ static unsigned int markevil_tg(struct sk_buff * skb, const struct xt_action_par
 
 static struct xt_target markevil_tg_reg[] __read_mostly = {
 	{
-		.name      = "MARKEVIL",
+		.name      = "EVIL",
 		.revision  = 0,
 		.family    = NFPROTO_IPV4,
 		.target    = markevil_tg,
